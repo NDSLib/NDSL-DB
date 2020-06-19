@@ -23,6 +23,7 @@ public class DBMain {
 
         DoubleDB double_db=new DoubleDB(key_file, value_file);
         System.out.println("Value:"+double_db.get("Key1"));
+        double_db.add("key2","value2");
         double_db.close();
     }
 }

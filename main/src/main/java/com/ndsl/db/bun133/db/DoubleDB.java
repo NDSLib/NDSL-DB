@@ -27,6 +27,24 @@ public class DoubleDB {
         return value_file.get(getIndex(key));
     }
 
+    public DoubleDB add(String key,String value){
+        if(isLocked) throw new IllegalStateException();
+        key_file.add(key);
+        value_file.add(value);
+        return this;
+    }
+
+    public DoubleDB addAll(String... datas){
+        if(isLocked) throw new IllegalStateException();
+        if(datas==null || datas.length % 2 != 0){
+             throw new IllegalArgumentException();
+        }
+        for (int i = 0; i < datas.length; i=+2) {
+            add(datas[i],datas[i+1]);
+        }
+        return this;
+    }
+
     public boolean isLocked=false;
 
     public DoubleDB close() throws IOException {
