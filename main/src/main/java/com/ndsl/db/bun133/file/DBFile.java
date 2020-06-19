@@ -108,4 +108,24 @@ public class DBFile {
         }
         return objects.toArray(new DBObject[0]);
     }
+
+    public boolean contain(String s){
+        return Strings.contains(s);
+    }
+
+    public int getIndex(String s){
+        if(!contain(s)) return -1;
+        String[] collection = getCollection();
+        for (int i = 0; i < collection.length; i++) {
+            if(collection[i].equals(s)) return i;
+        }
+        return -1;
+    }
+
+    public String get(int index) {
+        if(index>this.Strings.size()){
+            return "Out of Length";
+        }
+        return this.Strings.get(index);
+    }
 }
