@@ -46,7 +46,7 @@ public class DBFile {
 
     public DBFile add(String s){
         if(isClosed) throw new IllegalStateException();
-        Strings.add(s);
+        if(!isExists(s)) Strings.add(s);
         return this;
     }
 
@@ -55,6 +55,7 @@ public class DBFile {
         return flush(file);
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     public DBFile flush(File file) throws IOException {
         if(isClosed) throw new IllegalStateException();
         String path = file.getAbsolutePath();
@@ -127,5 +128,10 @@ public class DBFile {
             return "Out of Length";
         }
         return this.Strings.get(index);
+    }
+
+    public boolean isExists(String s){
+        if(isClosed) throw new IllegalStateException();
+        return Strings.contains(s);
     }
 }
