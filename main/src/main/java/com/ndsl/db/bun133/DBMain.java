@@ -1,6 +1,7 @@
 package com.ndsl.db.bun133;
 
 import com.ndsl.db.bun133.db.DoubleDB;
+import com.ndsl.db.bun133.db.MultiKeyValueDB;
 import com.ndsl.db.bun133.db.MultiValueDB;
 import com.ndsl.db.bun133.db.SingleDBBase;
 import com.ndsl.db.bun133.file.DBFile;
@@ -39,5 +40,15 @@ public class DBMain {
         MultiValueDB multiValueDB=new MultiValueDB(multi_key,multi_value1,multi_value2);
         System.out.println("MultiDB:"+ Arrays.toString(multiValueDB.get("key1")));
         multiValueDB.close();
+
+        DBFile multi_key1=new DBFile(new File(resources+"\\multi_db_key1.ndb"));
+        DBFile multi_key2=new DBFile(new File(resources+"\\multi_db_key2.ndb"));
+        multi_value1=new DBFile(new File(resources+"\\multi_db_value1.ndb"));
+        multi_value2=new DBFile(new File(resources+"\\multi_db_value2.ndb"));
+
+        MultiKeyValueDB multiKeyValueDB=new MultiKeyValueDB(Arrays.asList(multi_key1,multi_key2),Arrays.asList(multi_value1,multi_value2));
+        System.out.println(Arrays.toString(multiKeyValueDB.getValues("key1")));
+        System.out.println(Arrays.toString(multiKeyValueDB.getValues("key2")));
+        multiKeyValueDB.close();
     }
 }
